@@ -48,13 +48,10 @@ namespace :sepomex do
     csv_text = File.readlines('latest.csv', encoding: 'ISO-8859-1:UTF-8')[1..-1].join
     csv = CSV.parse(csv_text, col_sep: '|', quote_char: '%', headers: :first_row, return_headers: true)
     csv.delete('d_tipo_asenta')
-    csv.delete('c_estado')
     csv.delete('d_CP')
     csv.delete('c_oficina')
     csv.delete('c_CP')
     csv.delete('c_tipo_asenta')
-    csv.delete('c_mnpio')
-    csv.delete('c_mnpio')
     csv.delete('id_asenta_cpcons')
     csv.delete('d_zona')
     csv.delete('c_cve_ciudad')
@@ -72,6 +69,8 @@ namespace :sepomex do
       arg[:colonia] = row_h['d_asenta']
       arg[:municipio] = row_h['D_mnpio']
       arg[:estado] = row_h['d_estado']
+      arg[:c_municipio] = row_h['c_mnpio']
+      arg[:c_estado] = row_h['c_estado']
       PostalCode.find_or_create_by(arg)
       print "#{(100 * count) / total}% \r"
       count += 1

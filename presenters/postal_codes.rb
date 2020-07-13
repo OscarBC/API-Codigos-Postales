@@ -30,7 +30,9 @@ module PostalCodes
   def self.prepare_locations_json(locations, code, shared_data)
     { 'codigo_postal' => code,
       'municipio' => shared_data[0],
+      'c_municipio' => shared_data[2],
       'estado' => shared_data[1],
+      'c_estado' => shared_data[3],
       'colonias' => locations }
   end
 
