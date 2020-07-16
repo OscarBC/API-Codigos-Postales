@@ -47,13 +47,13 @@ namespace :sepomex do
     puts 'Parsing Postal Codes'
     csv_text = File.readlines('latest.csv', encoding: 'ISO-8859-1:UTF-8')[1..-1].join
     csv = CSV.parse(csv_text, col_sep: '|', quote_char: '%', headers: :first_row, return_headers: true)
-    csv.delete('d_tipo_asenta')
+    # csv.delete('d_tipo_asenta')
     csv.delete('d_CP')
     csv.delete('c_oficina')
     csv.delete('c_CP')
     csv.delete('c_tipo_asenta')
     csv.delete('id_asenta_cpcons')
-    csv.delete('d_zona')
+    # csv.delete('d_zona')
     csv.delete('c_cve_ciudad')
     csv.delete('d_ciudad')
 
@@ -62,6 +62,9 @@ namespace :sepomex do
     ActiveRecord::Base.logger = nil
     count = 0
     total = csv.count
+
+    puts "total: #{total}"
+
     csv.each do |row|
       arg = {}
       row_h = row.to_h
@@ -71,6 +74,10 @@ namespace :sepomex do
       arg[:estado] = row_h['d_estado']
       arg[:c_municipio] = row_h['c_mnpio']
       arg[:c_estado] = row_h['c_estado']
+
+      arg[:d_tipo_asenta] = row_h['d_tipo_asenta']
+      arg[:d_zona] = row_h['d_zona']
+
       PostalCode.find_or_create_by(arg)
       print "#{(100 * count) / total}% \r"
       count += 1

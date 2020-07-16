@@ -15,6 +15,6 @@ class PostalCode < ActiveRecord::Base
   end
 
   def self.get_shared_data_for(code)
-    with_code(code).limit(1).pluck(:municipio, :estado, :c_municipio, :c_estado)
+    with_code(code).limit(1).pluck(:municipio, :estado, :c_municipio, :c_estado, :d_tipo_asenta, :d_zona)
   end
 end
