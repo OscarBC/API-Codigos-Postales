@@ -52,7 +52,7 @@ namespace :sepomex do
     csv.delete('c_oficina')
     csv.delete('c_CP')
     csv.delete('c_tipo_asenta')
-    csv.delete('id_asenta_cpcons')
+    #csv.delete('id_asenta_cpcons')
     # csv.delete('d_zona')
     csv.delete('c_cve_ciudad')
     csv.delete('d_ciudad')
@@ -75,6 +75,7 @@ namespace :sepomex do
       arg[:c_municipio] = row_h['c_mnpio']
       arg[:c_estado] = row_h['c_estado']
 
+      arg[:id_colonia] = row_h['id_asenta_cpcons']
       arg[:d_tipo_asenta] = row_h['d_tipo_asenta']
       arg[:d_zona] = row_h['d_zona']
 
